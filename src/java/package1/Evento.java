@@ -33,8 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author alantorres
  */
-@SessionScoped
-@ManagedBean(name = "eventos")
 @Entity
 @Table(name = "eventos")
 @XmlRootElement
@@ -97,23 +95,6 @@ public class Evento implements Serializable {
     @Column(name = "lugar")
     private String lugar;
    
-    private static final String PERSISTENCE_UNIT_NAME = "CocoPU";
-EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-    EntityManager em = emf.createEntityManager();
-   
-    public Evento(){
-        
-    }
-    
-    public String getValue(){
-        return "hola";
-    }
-    
-    public String getEventos(){
-        
-        return "";
-    }
-    
     
     public Evento(Integer id) {
         this.id = id;
