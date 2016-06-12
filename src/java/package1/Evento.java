@@ -94,7 +94,7 @@ public class Evento implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "lugar")
     private String lugar;
-   
+  
     
     public Evento(Integer id) {
         this.id = id;

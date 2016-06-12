@@ -24,6 +24,14 @@ public class EventoDataGrid implements Serializable {
     
     private Evento selected;
     
+    @ManagedProperty("#{Evento}")
+    private Evento service;
+    
+    @PostConstruct
+    private void init() {
+        eventos = service.getEventos();
+    }
+    
     /**
      * Creates a new instance of EventosDataGrid
      */
