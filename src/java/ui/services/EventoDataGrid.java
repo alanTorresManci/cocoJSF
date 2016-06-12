@@ -18,7 +18,7 @@ import package1.Evento;
  */
 @ManagedBean
 @ViewScoped
-public class EventosDataGrid implements Serializable {
+public class EventoDataGrid implements Serializable {
 
     private List<Evento> eventos;
     
@@ -27,7 +27,7 @@ public class EventosDataGrid implements Serializable {
     /**
      * Creates a new instance of EventosDataGrid
      */
-    public EventosDataGrid() {
+    public EventoDataGrid() {
     }
     
      
