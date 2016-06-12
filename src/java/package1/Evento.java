@@ -27,20 +27,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author alantorres
  */
 @Entity
-@Table(name = "eventos")
+@Table(name = "Eventos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Eventos.findAll", query = "SELECT e FROM Eventos e"),
-    @NamedQuery(name = "Eventos.findById", query = "SELECT e FROM Eventos e WHERE e.id = :id"),
-    @NamedQuery(name = "Eventos.findByConferencia", query = "SELECT e FROM Eventos e WHERE e.conferencia = :conferencia"),
-    @NamedQuery(name = "Eventos.findByExpositor", query = "SELECT e FROM Eventos e WHERE e.expositor = :expositor"),
-    @NamedQuery(name = "Eventos.findByCapacidad", query = "SELECT e FROM Eventos e WHERE e.capacidad = :capacidad"),
-    @NamedQuery(name = "Eventos.findByActual", query = "SELECT e FROM Eventos e WHERE e.actual = :actual"),
-    @NamedQuery(name = "Eventos.findByFecha", query = "SELECT e FROM Eventos e WHERE e.fecha = :fecha"),
-    @NamedQuery(name = "Eventos.findBySinopsis", query = "SELECT e FROM Eventos e WHERE e.sinopsis = :sinopsis"),
-    @NamedQuery(name = "Eventos.findByImagen", query = "SELECT e FROM Eventos e WHERE e.imagen = :imagen"),
-    @NamedQuery(name = "Eventos.findByLugar", query = "SELECT e FROM Eventos e WHERE e.lugar = :lugar")})
-public class Eventos implements Serializable {
+    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Eventos e"),
+    @NamedQuery(name = "Evento.findById", query = "SELECT e FROM Eventos e WHERE e.id = :id"),
+    @NamedQuery(name = "Evento.findByConferencia", query = "SELECT e FROM Eventos e WHERE e.conferencia = :conferencia"),
+    @NamedQuery(name = "Evento.findByExpositor", query = "SELECT e FROM Eventos e WHERE e.expositor = :expositor"),
+    @NamedQuery(name = "Evento.findByCapacidad", query = "SELECT e FROM Eventos e WHERE e.capacidad = :capacidad"),
+    @NamedQuery(name = "Evento.findByActual", query = "SELECT e FROM Eventos e WHERE e.actual = :actual"),
+    @NamedQuery(name = "Evento.findByFecha", query = "SELECT e FROM Eventos e WHERE e.fecha = :fecha"),
+    @NamedQuery(name = "Evento.findBySinopsis", query = "SELECT e FROM Eventos e WHERE e.sinopsis = :sinopsis"),
+    @NamedQuery(name = "Evento.findByImagen", query = "SELECT e FROM Eventos e WHERE e.imagen = :imagen"),
+    @NamedQuery(name = "Evento.findByLugar", query = "SELECT e FROM Eventos e WHERE e.lugar = :lugar")})
+public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -87,14 +87,14 @@ public class Eventos implements Serializable {
     @Column(name = "lugar")
     private String lugar;
 
-    public Eventos() {
+    public Evento() {
     }
 
-    public Eventos(Integer id) {
+    public Evento(Integer id) {
         this.id = id;
     }
 
-    public Eventos(Integer id, String conferencia, String expositor, int capacidad, int actual, Date fecha, String sinopsis, String imagen, String lugar) {
+    public Evento(Integer id, String conferencia, String expositor, int capacidad, int actual, Date fecha, String sinopsis, String imagen, String lugar) {
         this.id = id;
         this.conferencia = conferencia;
         this.expositor = expositor;
@@ -188,10 +188,10 @@ public class Eventos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Eventos)) {
+        if (!(object instanceof Evento)) {
             return false;
         }
-        Eventos other = (Eventos) object;
+        Evento other = (Evento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -200,7 +200,7 @@ public class Eventos implements Serializable {
 
     @Override
     public String toString() {
-        return "package1.Eventos[ id=" + id + " ]";
+        return "package1.Evento[ id=" + id + " ]";
     }
     
 }

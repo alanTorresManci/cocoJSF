@@ -2,13 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html" 
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Registrarse</title>
     </h:head>
     <h:body>
-        <h1>HOLA</h1>
-        <p:spinner/>
+        <p:dataGrid var="ev" value="#{Eventos.eventos}" columns="4">
+            <f:facet name="header">
+                Conferencias
+            </f:facet>
+            <p:panel header="#{ev.conferencia}">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Expositor:"/>
+                    <h:outputText value="#{ev.expositor}"/>
+                    <h:outputText value="Sinopsis:"/>
+                    <h:outputText value="#{ev.sinopsis}"/>
+                    <h:outputText value="Fecha:"/>
+                    <h:outputText value="#{ev.fecha}"/>
+                    <p:link outcome="registrarse" value="Registrarse">
+                        <f:param name="eventoId" value="#{ev.id}"/>
+                    </p:link>
+                </h:panelGrid>
+            </p:panel>
+        </p:dataGrid>
+        <p:dialog header="Registrarse en la conferencia" widgetVar="confDialog" modal="true" showEffect="fade" hideEffect="fade" resizeable="false">
+            
+        </p:dialog>
     </h:body>
 </html>
 
