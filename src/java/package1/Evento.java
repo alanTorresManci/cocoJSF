@@ -109,9 +109,11 @@ EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UN
         return "hola";
     }
     
-    public String getEventos(){
-        
-        return "";
+    /**
+     * Retorna la lista de eventos
+     */
+    public List<Evento> getEventos(){
+        return new List<Evento>();
     }
     
     
