@@ -7,17 +7,24 @@ package package1;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Persistence;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,22 +33,25 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author alantorres
  */
+@SessionScoped
+@ManagedBean(name = "eventos")
 @Entity
-@Table(name = "Eventos")
+@Table(name = "eventos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Eventos e"),
-    @NamedQuery(name = "Evento.findById", query = "SELECT e FROM Eventos e WHERE e.id = :id"),
-    @NamedQuery(name = "Evento.findByConferencia", query = "SELECT e FROM Eventos e WHERE e.conferencia = :conferencia"),
-    @NamedQuery(name = "Evento.findByExpositor", query = "SELECT e FROM Eventos e WHERE e.expositor = :expositor"),
-    @NamedQuery(name = "Evento.findByCapacidad", query = "SELECT e FROM Eventos e WHERE e.capacidad = :capacidad"),
-    @NamedQuery(name = "Evento.findByActual", query = "SELECT e FROM Eventos e WHERE e.actual = :actual"),
-    @NamedQuery(name = "Evento.findByFecha", query = "SELECT e FROM Eventos e WHERE e.fecha = :fecha"),
-    @NamedQuery(name = "Evento.findBySinopsis", query = "SELECT e FROM Eventos e WHERE e.sinopsis = :sinopsis"),
-    @NamedQuery(name = "Evento.findByImagen", query = "SELECT e FROM Eventos e WHERE e.imagen = :imagen"),
-    @NamedQuery(name = "Evento.findByLugar", query = "SELECT e FROM Eventos e WHERE e.lugar = :lugar")})
+    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM eventos e"),
+    @NamedQuery(name = "Evento.findById", query = "SELECT e FROM eventos e WHERE e.id = :id"),
+    @NamedQuery(name = "Evento.findByConferencia", query = "SELECT e FROM eventos e WHERE e.conferencia = :conferencia"),
+    @NamedQuery(name = "Evento.findByExpositor", query = "SELECT e FROM eventos e WHERE e.expositor = :expositor"),
+    @NamedQuery(name = "Evento.findByCapacidad", query = "SELECT e FROM eventos e WHERE e.capacidad = :capacidad"),
+    @NamedQuery(name = "Evento.findByActual", query = "SELECT e FROM eventos e WHERE e.actual = :actual"),
+    @NamedQuery(name = "Evento.findByFecha", query = "SELECT e FROM eventos e WHERE e.fecha = :fecha"),
+    @NamedQuery(name = "Evento.findBySinopsis", query = "SELECT e FROM eventos e WHERE e.sinopsis = :sinopsis"),
+    @NamedQuery(name = "Evento.findByImagen", query = "SELECT e FROM eventos e WHERE e.imagen = :imagen"),
+    @NamedQuery(name = "Evento.findByLugar", query = "SELECT e FROM eventos e WHERE e.lugar = :lugar")})
 public class Evento implements Serializable {
-
+    // EntityManagerFactory emf = Persistence.createEntityManagerFactory("Eventos");
+    // EntityManager em = emf.createEntityManager();
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,10 +96,25 @@ public class Evento implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "lugar")
     private String lugar;
-
-    public Evento() {
+   
+    private static final String PERSISTENCE_UNIT_NAME = "CocoPU";
+EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    EntityManager em = emf.createEntityManager();
+   
+    public Evento(){
+        
     }
-
+    
+    public String getValue(){
+        return "hola";
+    }
+    
+    public String getEventos(){
+        
+        return "";
+    }
+    
+    
     public Evento(Integer id) {
         this.id = id;
     }
@@ -109,7 +134,9 @@ public class Evento implements Serializable {
     public Integer getId() {
         return id;
     }
-
+    public void texto(){
+        System.out.println("hola");
+    }
     public void setId(Integer id) {
         this.id = id;
     }

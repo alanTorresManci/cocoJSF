@@ -28,6 +28,7 @@ public class EventosDataGrid implements Serializable {
      * Creates a new instance of EventosDataGrid
      */
     public EventosDataGrid() {
+        selected = new Evento();
     }
     
      
