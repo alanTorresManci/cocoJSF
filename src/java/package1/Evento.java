@@ -6,6 +6,7 @@
 package package1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -111,9 +112,10 @@ EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UN
     
     /**
      * Retorna la lista de eventos
+     * @return 
      */
     public List<Evento> getEventos(){
-        return new List<Evento>();
+        return new ArrayList<>();
     }
     
     
