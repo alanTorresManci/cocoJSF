@@ -20,8 +20,9 @@ import javax.persistence.Query;
 @SessionScoped
 @ManagedBean(name = "eventos")
 public class EventosController {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("CocoPU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.hibernate.tutorial.jpa");
     //public EntityManager em = emf.createEntityManager();
+    
 
     public EventosController() {
     }
