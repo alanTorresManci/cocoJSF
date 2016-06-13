@@ -38,16 +38,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "eventos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM eventos e"),
-    @NamedQuery(name = "Evento.findById", query = "SELECT e FROM eventos e WHERE e.id = :id"),
-    @NamedQuery(name = "Evento.findByConferencia", query = "SELECT e FROM eventos e WHERE e.conferencia = :conferencia"),
-    @NamedQuery(name = "Evento.findByExpositor", query = "SELECT e FROM eventos e WHERE e.expositor = :expositor"),
-    @NamedQuery(name = "Evento.findByCapacidad", query = "SELECT e FROM eventos e WHERE e.capacidad = :capacidad"),
-    @NamedQuery(name = "Evento.findByActual", query = "SELECT e FROM eventos e WHERE e.actual = :actual"),
-    @NamedQuery(name = "Evento.findByFecha", query = "SELECT e FROM eventos e WHERE e.fecha = :fecha"),
-    @NamedQuery(name = "Evento.findBySinopsis", query = "SELECT e FROM eventos e WHERE e.sinopsis = :sinopsis"),
-    @NamedQuery(name = "Evento.findByImagen", query = "SELECT e FROM eventos e WHERE e.imagen = :imagen"),
-    @NamedQuery(name = "Evento.findByLugar", query = "SELECT e FROM eventos e WHERE e.lugar = :lugar")})
+    //@NamedQuery(name = "Evento.findAll", query = "SELECT e FROM eventos e"),
+    //@NamedQuery(name = "Evento.findById", query = "SELECT e FROM eventos e WHERE e.id = :id"),
+    //@NamedQuery(name = "Evento.findByConferencia", query = "SELECT e FROM eventos e WHERE e.conferencia = :conferencia"),
+    //@NamedQuery(name = "Evento.findByExpositor", query = "SELECT e FROM eventos e WHERE e.expositor = :expositor"),
+    //@NamedQuery(name = "Evento.findByCapacidad", query = "SELECT e FROM eventos e WHERE e.capacidad = :capacidad"),
+    //@NamedQuery(name = "Evento.findByActual", query = "SELECT e FROM eventos e WHERE e.actual = :actual"),
+    //@NamedQuery(name = "Evento.findByFecha", query = "SELECT e FROM eventos e WHERE e.fecha = :fecha"),
+    //@NamedQuery(name = "Evento.findBySinopsis", query = "SELECT e FROM eventos e WHERE e.sinopsis = :sinopsis"),
+    //@NamedQuery(name = "Evento.findByImagen", query = "SELECT e FROM eventos e WHERE e.imagen = :imagen"),
+    //@NamedQuery(name = "Evento.findByLugar", query = "SELECT e FROM eventos e WHERE e.lugar = :lugar")
+})
 public class Evento implements Serializable {
     // EntityManagerFactory emf = Persistence.createEntityManagerFactory("Eventos");
     // EntityManager em = emf.createEntityManager();
