@@ -8,20 +8,20 @@
         <title>Registrarse</title>
     </h:head>
     <h:body>
-        <!--<p:dataGrid var="ev" value="#{Evento.eventos}" columns="4">
+        <p:dataGrid var="conf" value="#{Conference.conferences}" columns="4">
             <f:facet name="header">
                 Conferencias
             </f:facet>
-            <p:panel header="#{ev.conferencia}">
+            <p:panel header="#{conf.name}">
                 <h:panelGrid columns="2">
                     <h:outputText value="Expositor:"/>
-                    <h:outputText value="#{ev.expositor}"/>
+                    <h:outputText value="#{conf.exhibitor}"/>
                     <h:outputText value="Sinopsis:"/>
-                    <h:outputText value="#{ev.sinopsis}"/>
+                    <h:outputText value="#{conf.synopsis}"/>
                     <h:outputText value="Fecha:"/>
-                    <h:outputText value="#{ev.fecha}"/>
+                    <h:outputText value="#{conf.date}"/>
                     <p:commandLink update="evDetail" value="Inscribirme" oncomplete="PF('evDialog').show()">
-                        <f:setPropertyActionListener value="#{ev}" target="#{ConferenceView.selected}"/>
+                        <f:setPropertyActionListener value="#{conf}" target="#{Conference.selected}"/>
                     </p:commandLink>
                 </h:panelGrid>
             </p:panel>
@@ -30,8 +30,7 @@
             <h:form id="evDetail">
                 
             </h:form>
-        </p:dialog>-->
-        <h:link target="admin/login.xhtml" value="Go"/>
+        </p:dialog>
     </h:body>
 </html>
 
