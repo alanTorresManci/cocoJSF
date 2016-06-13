@@ -6,6 +6,7 @@
 package package1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -94,7 +95,26 @@ public class Evento implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "lugar")
     private String lugar;
-  
+   
+    private static final String PERSISTENCE_UNIT_NAME = "CocoPU";
+EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    EntityManager em = emf.createEntityManager();
+   
+    public Evento(){
+        
+    }
+    
+    public String getValue(){
+        return "hola";
+    }
+    
+    /**
+     * Retorna la lista de eventos
+     * @return 
+     */
+    public List<Evento> getEventos(){
+        return new ArrayList<>();
+    }
     
     public Evento(Integer id) {
         this.id = id;
