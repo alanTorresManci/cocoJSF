@@ -8,15 +8,23 @@ package main.datasets.admin;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
+ * 
  *
+ * 
+ * 
  * @author germanamz
  */
 @ManagedBean(name = "Admin")
 @SessionScoped
 public class Admin implements Serializable {
-
+    private EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("CocoPU");
+    public EntityManager em = emf.createEntityManager();
     private String username;
     private String password;
     
@@ -47,7 +55,8 @@ public class Admin implements Serializable {
     */
     
     public String login() {
-        return "";
+        System.out.println("hola");
+        return "hola";
     }
     
 }
