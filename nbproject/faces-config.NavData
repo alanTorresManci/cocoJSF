@@ -2,8 +2,9 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="welcomePrimefaces.xhtml" x="593" y="311" zoom="true"/>
-        <Node id="index.xhtml" x="159" y="105" zoom="false"/>
+        <Node id="admin/newConference.xhtml" x="504" y="131" zoom="true"/>
+        <Node id="index.xhtml" x="73" y="130" zoom="false"/>
+        <Node id="admin/login.xhtml" x="52" y="372" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

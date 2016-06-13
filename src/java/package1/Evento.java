@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author alantorres
  */
-@SessionScoped
-@ManagedBean(name = "eventos")
 @Entity
 @Table(name = "eventos")
 @XmlRootElement
@@ -117,7 +115,6 @@ EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UN
     public List<Evento> getEventos(){
         return new ArrayList<>();
     }
-    
     
     public Evento(Integer id) {
         this.id = id;
