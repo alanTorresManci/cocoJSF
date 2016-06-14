@@ -8,6 +8,7 @@ package main.datasets.manager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -16,10 +17,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import main.datasets.conference.Conferences;
 
 /**
  *
@@ -33,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Managers.findById", query = "SELECT m FROM Managers m WHERE m.id = :id"),
     @NamedQuery(name = "Managers.findByName", query = "SELECT m FROM Managers m WHERE m.name = :name")})
 public class Managers implements Serializable {
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "managers")
+    private Conferences conferences;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -103,6 +109,14 @@ public class Managers implements Serializable {
             em.createNamedQuery("Admins.findAll", Managers.class);
         
         return query.getResultList().toArray();
+    }
+
+    public Conferences getConferences() {
+        return conferences;
+    }
+
+    public void setConferences(Conferences conferences) {
+        this.conferences = conferences;
     }
     
 }
