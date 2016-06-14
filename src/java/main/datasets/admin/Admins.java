@@ -6,15 +6,18 @@
 package main.datasets.admin;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Admins.findAll", query = "SELECT a FROM Admins a"),
     @NamedQuery(name = "Admins.findById", query = "SELECT a FROM Admins a WHERE a.id = :id"),
     @NamedQuery(name = "Admins.findByUsername", query = "SELECT a FROM Admins a WHERE a.username = :username"),
+    @NamedQuery(name = "Admins.findByAll", query = "SELECT a FROM Admins a WHERE a.username = :username and a.password = :password"),
     @NamedQuery(name = "Admins.findByPassword", query = "SELECT a FROM Admins a WHERE a.password = :password")})
 public class Admins implements Serializable {
 
@@ -49,8 +53,10 @@ public class Admins implements Serializable {
     @Size(min = 1, max = 128)
     @Column(name = "password")
     private String password;
-
-    public Admins() {
+    
+    
+    public Admins(){
+        
     }
 
     public Admins(Integer id) {
@@ -62,7 +68,25 @@ public class Admins implements Serializable {
         this.username = username;
         this.password = password;
     }
-
+    
+    public Integer login(String username, String password){
+        
+        return 0;
+    }
+    public Integer findByAll(String username, String password, EntityManager em)
+    {
+        TypedQuery<Admins> query =
+            em.createNamedQuery("Admins.findByAll", Admins.class);
+        
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        List<Admins> results = query.getResultList();
+        if(results.toArray().length == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
     public Integer getId() {
         return id;
     }

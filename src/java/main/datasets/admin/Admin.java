@@ -22,13 +22,14 @@ import javax.persistence.Persistence;
 @ManagedBean(name = "Admin")
 @SessionScoped
 public class Admin implements Serializable {
-    private EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("CocoPU");
-    public EntityManager em = emf.createEntityManager();
+    
     private String username;
     private String password;
-    
+    public EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("CocoPU");
+    public EntityManager em = emf.createEntityManager();
     public Admin() {
+        
     }
 
     /*
@@ -55,8 +56,16 @@ public class Admin implements Serializable {
     */
     
     public String login() {
-        System.out.println("hola");
-        return "hola";
+        Admins admins = new Admins();
+        
+        int result = admins.findByAll(this.username, this.password, em);
+        if(result == 1)
+        {
+            System.out.println("si");
+        }
+        else
+            System.out.println("no");
+        return "";
     }
     
 }
