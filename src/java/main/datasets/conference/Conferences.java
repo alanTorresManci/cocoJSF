@@ -7,9 +7,11 @@ package main.datasets.conference;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -18,9 +20,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import main.datasets.admin.Admins;
 
 /**
  *
@@ -69,7 +73,7 @@ public class Conferences implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "image")
-    private int image;
+    private String image;
     @Basic(optional = false)
     @NotNull
     @Lob
@@ -93,7 +97,7 @@ public class Conferences implements Serializable {
         this.id = id;
     }
 
-    public Conferences(Long id, String name, String exhibitor, int capacity, Date date, int image, String synopsis, int value, String room) {
+    public Conferences(Long id, String name, String exhibitor, int capacity, Date date, String image, String synopsis, int value, String room) {
         this.id = id;
         this.name = name;
         this.exhibitor = exhibitor;
@@ -145,11 +149,12 @@ public class Conferences implements Serializable {
         this.date = date;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
+    
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -176,7 +181,11 @@ public class Conferences implements Serializable {
     public void setRoom(String room) {
         this.room = room;
     }
-
+    public List<Conferences> getAll(EntityManager em){
+        TypedQuery<Conferences> query =
+            em.createNamedQuery("Conferences.findAll", Conferences.class);
+        return query.getResultList();
+    }
     @Override
     public int hashCode() {
         int hash = 0;
@@ -196,7 +205,7 @@ public class Conferences implements Serializable {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
         return "main.datasets.conference.Conferences[ id=" + id + " ]";

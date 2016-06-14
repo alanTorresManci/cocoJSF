@@ -7,8 +7,12 @@ package main.datasets.conference;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,7 +20,7 @@ import javax.persistence.TemporalType;
  *
  * @author germanamz
  */
-@ManagedBean(name = "ConferenceModel")
+@ManagedBean(name = "Conference")
 @ApplicationScoped
 public class Conference implements Serializable {
 
@@ -30,6 +34,10 @@ public class Conference implements Serializable {
     private String synopsis;
     private int value;
     private String room;
+    
+    public EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("CocoPU");
+    public EntityManager em = emf.createEntityManager();
     
     public Conference() {
     }
@@ -101,7 +109,13 @@ public class Conference implements Serializable {
     public String getRoom() {
         return room;
     }
-
+    
+    public List<Conferences> getConferences()
+    {
+        Conferences conferences = new Conferences();
+        return conferences.getAll(em);
+    }
+    
     public void setRoom(String room) {
         this.room = room;
     }

@@ -20,9 +20,6 @@
                     <h:outputText value="#{conf.synopsis}"/>
                     <h:outputText value="Fecha:"/>
                     <h:outputText value="#{conf.date}"/>
-                    <p:commandLink update="evDetail" value="Inscribirme" oncomplete="PF('evDialog').show()">
-                        <f:setPropertyActionListener value="#{conf}" target="#{Conference.selected}"/>
-                    </p:commandLink>
                 </h:panelGrid>
             </p:panel>
         </p:dataGrid>
