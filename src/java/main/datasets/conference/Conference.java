@@ -46,74 +46,6 @@ public class Conference implements Serializable {
         emf = Persistence.createEntityManagerFactory("cocoJSF");
         em = emf.createEntityManager();
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getExhibitor() {
-        return exhibitor;
-    }
-
-    public void setExhibitor(String exhibitor) {
-        this.exhibitor = exhibitor;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getSynopsis() {
-        return synopsis;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public String getRoom() {
-        return room;
-    }
     
     public void storeConference(){
         Conferences conferences = new Conferences();
@@ -134,11 +66,5 @@ public class Conference implements Serializable {
         Conferences conferences = new Conferences();
         return conferences.getAll(em);
     }
-    
-    public void setRoom(String room) {
-        this.room = room;
-    }
-    
-    
     
 }

@@ -186,8 +186,7 @@ public class Conferences implements Serializable {
         this.room = room;
     }
     public List<Conferences> getAll(EntityManager em){
-        TypedQuery<Conferences> query =
-            em.createNamedQuery("Conferences.findAll", Conferences.class);
+        TypedQuery<Conferences> query = em.createNamedQuery("Conferences.findAll", Conferences.class);
         return query.getResultList();
     }
     @Override
