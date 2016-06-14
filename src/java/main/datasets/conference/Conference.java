@@ -7,8 +7,8 @@ package main.datasets.conference;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
@@ -16,8 +16,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,14 +32,19 @@ public class Conference implements Serializable {
     private String date;
     private String image;
     private String synopsis;
-    private int value;
+    private int cost;
     private String room;
     
-    public EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("CocoPU");
-    public EntityManager em = emf.createEntityManager();
+    public EntityManagerFactory emf;
+    public EntityManager em;
     
     public Conference() {
+    }
+    
+    @PostConstruct
+    public void init() {
+        emf = Persistence.createEntityManagerFactory("cocoJSF");
+        em = emf.createEntityManager();
     }
 
     public int getId() {
@@ -100,12 +103,12 @@ public class Conference implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public int getValue() {
-        return value;
+    public int getCost() {
+        return cost;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public String getRoom() {
@@ -114,7 +117,7 @@ public class Conference implements Serializable {
     
     public void storeConference(){
         Conferences conferences = new Conferences();
-        conferences.store(em, name, exhibitor, capacity, date, synopsis, value, room);
+        conferences.store(em, name, exhibitor, capacity, date, synopsis, cost, room);
         ExternalContext ec = FacesContext.getCurrentInstance()
                     .getExternalContext();
             try {

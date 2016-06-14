@@ -70,18 +70,19 @@ public class Admins implements Serializable {
         this.password = password;
     }
     
-    public Integer login(String username, String password){
+    public Integer login(String username, String password) {
         
         return 0;
     }
-    public Object[] admin(EntityManager em){
+    
+    public Object[] admin(EntityManager em) {
         TypedQuery<Admins> query =
             em.createNamedQuery("Admins.findAll", Admins.class);
         
         return query.getResultList().toArray();
     }
-    public Integer findByAll(String username, String password, EntityManager em)
-    {
+    
+    public Integer findByAll(String username, String password, EntityManager em) {
         TypedQuery<Admins> query =
             em.createNamedQuery("Admins.findByAll", Admins.class);
         

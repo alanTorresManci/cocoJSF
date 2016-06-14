@@ -6,26 +6,20 @@
 package main.datasets.conference;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import main.datasets.admin.Admins;
 
 /**
  *
@@ -42,7 +36,7 @@ import main.datasets.admin.Admins;
     @NamedQuery(name = "Conferences.findByCapacity", query = "SELECT c FROM Conferences c WHERE c.capacity = :capacity"),
     @NamedQuery(name = "Conferences.findByDate", query = "SELECT c FROM Conferences c WHERE c.date = :date"),
     @NamedQuery(name = "Conferences.findByImage", query = "SELECT c FROM Conferences c WHERE c.image = :image"),
-    @NamedQuery(name = "Conferences.findByValue", query = "SELECT c FROM Conferences c WHERE c.value = :value"),
+    @NamedQuery(name = "Conferences.findByValue", query = "SELECT c FROM Conferences c WHERE c.cost = :cost"),
     @NamedQuery(name = "Conferences.findByRoom", query = "SELECT c FROM Conferences c WHERE c.room = :room")})
 public class Conferences implements Serializable {
 
@@ -81,8 +75,8 @@ public class Conferences implements Serializable {
     private String synopsis;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "value")
-    private int value;
+    @Column(name = "cost")
+    private int cost;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -96,7 +90,7 @@ public class Conferences implements Serializable {
         this.id = id;
     }
 
-    public Conferences(Long id, String name, String exhibitor, int capacity, String date, String image, String synopsis, int value, String room) {
+    public Conferences(Long id, String name, String exhibitor, int capacity, String date, String image, String synopsis, int cost, String room) {
         this.id = id;
         this.name = name;
         this.exhibitor = exhibitor;
@@ -104,13 +98,13 @@ public class Conferences implements Serializable {
         this.date = date;
         this.image = image;
         this.synopsis = synopsis;
-        this.value = value;
+        this.cost = cost;
         this.room = room;
     }
-    public int store(EntityManager em , String name, String exhibitor, int capacity, String date, String synopsis, int value, String room){
+    public int store(EntityManager em , String name, String exhibitor, int capacity, String date, String synopsis, int cost, String room){
         System.out.println(name);
-        String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `value`, `room`) VALUES ('"+ name +"', '"
-                + exhibitor+"', "+capacity+", '"+ date +"', '"+ synopsis +"', "+ value +", '"+ room +"')";
+        String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `cost`, `room`) VALUES ('"+ name +"', '"
+                + exhibitor+"', "+capacity+", '"+ date +"', '"+ synopsis +"', "+ cost +", '"+ room +"')";
         if(!em.getTransaction().isActive())
                 em.getTransaction().begin();
         em.createNativeQuery(query)
@@ -176,12 +170,12 @@ public class Conferences implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public int getValue() {
-        return value;
+    public int getCost() {
+        return cost;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setValue(int cost) {
+        this.cost = cost;
     }
 
     public String getRoom() {
