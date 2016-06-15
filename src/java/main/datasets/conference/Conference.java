@@ -120,6 +120,9 @@ public class Conference implements Serializable {
     
     public void storeConference(String administrador){
         Conferences conferences = new Conferences();
+        administrador = administrador.replace("[", " ");
+        administrador = administrador.replace("]", " ");
+        administrador = administrador.replaceAll("\\s+","");
         conferences.store(em, name, exhibitor, capacity, date, synopsis, cost, room, administrador);
         ExternalContext ec = FacesContext.getCurrentInstance()
                     .getExternalContext();
