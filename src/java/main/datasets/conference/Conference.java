@@ -7,8 +7,8 @@ package main.datasets.conference;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
@@ -35,14 +35,19 @@ public class Conference implements Serializable {
     private String date;
     private String image;
     private String synopsis;
-    private int value;
+    private int cost;
     private String room;
     
-    public EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("CocoPU");
-    public EntityManager em = emf.createEntityManager();
+    public EntityManagerFactory emf;
+    public EntityManager em;
     
     public Conference() {
+    }
+    
+    @PostConstruct
+    public void init() {
+        emf = Persistence.createEntityManagerFactory("cocoPU");
+        em = emf.createEntityManager();
     }
 
     public int getId() {
@@ -101,12 +106,12 @@ public class Conference implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public int getValue() {
-        return value;
+    public int getCost() {
+        return cost;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public String getRoom() {
@@ -115,7 +120,7 @@ public class Conference implements Serializable {
     
     public void storeConference(String administrador){
         Conferences conferences = new Conferences();
-        conferences.store(em, name, exhibitor, capacity, date, synopsis, value, room, administrador);
+        conferences.store(em, name, exhibitor, capacity, date, synopsis, cost, room, administrador);
         ExternalContext ec = FacesContext.getCurrentInstance()
                     .getExternalContext();
             try {
@@ -127,8 +132,22 @@ public class Conference implements Serializable {
             }
         
     }
-    public List<Conferences> getConferences()
-    {
+    
+//    public void storeConference(){
+//        Conferences conferences = new Conferences();
+//        conferences.store(em, name, exhibitor, capacity, date, synopsis, cost, room);
+//        ExternalContext ec = FacesContext.getCurrentInstance()
+//                    .getExternalContext();
+//            try {
+//                ec.redirect(ec.getRequestContextPath()
+//                        + "/faces/index.xhtml");
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//    }
+    
+    public List<Conferences> getConferences() {
         Conferences conferences = new Conferences();
         return conferences.getAll(em);
     }

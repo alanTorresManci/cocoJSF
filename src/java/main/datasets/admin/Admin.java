@@ -27,11 +27,14 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class Admin implements Serializable {
     
+    private int id;
     private String username;
     private String password;
+    
     public EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("CocoPU");
+				.createEntityManagerFactory("cocoJSF");
     public EntityManager em = emf.createEntityManager();
+    
     public Admin() {
         
     }
