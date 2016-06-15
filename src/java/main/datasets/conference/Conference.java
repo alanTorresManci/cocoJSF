@@ -18,6 +18,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import main.datasets.admin.Admin;
 
 /**
  *
@@ -112,9 +113,9 @@ public class Conference implements Serializable {
         return room;
     }
     
-    public void storeConference(){
+    public void storeConference(String administrador){
         Conferences conferences = new Conferences();
-        conferences.store(em, name, exhibitor, capacity, date, synopsis, value, room);
+        conferences.store(em, name, exhibitor, capacity, date, synopsis, value, room, administrador);
         ExternalContext ec = FacesContext.getCurrentInstance()
                     .getExternalContext();
             try {

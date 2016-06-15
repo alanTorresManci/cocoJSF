@@ -88,7 +88,12 @@ public class Conferences implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "room")
     private String room;
-
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "admin")
+    private String admin;
+    
     public Conferences() {
     }
 
@@ -107,10 +112,10 @@ public class Conferences implements Serializable {
         this.value = value;
         this.room = room;
     }
-    public int store(EntityManager em , String name, String exhibitor, int capacity, String date, String synopsis, int value, String room){
+    public int store(EntityManager em , String name, String exhibitor, int capacity, String date, String synopsis, int value, String room, String admin){
         System.out.println(name);
-        String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `value`, `room`) VALUES ('"+ name +"', '"
-                + exhibitor+"', "+capacity+", '"+ date +"', '"+ synopsis +"', "+ value +", '"+ room +"')";
+        String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `value`, `room`, administrador) VALUES ('"+ name +"', '"
+                + exhibitor+"', "+capacity+", '"+ date +"', '"+ synopsis +"', "+ value +", '"+ room +"', '"+ admin +"')";
         if(!em.getTransaction().isActive())
                 em.getTransaction().begin();
         em.createNativeQuery(query)
