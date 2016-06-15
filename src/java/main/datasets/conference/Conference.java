@@ -38,18 +38,12 @@ public class Conference implements Serializable {
     private int cost;
     private String room;
     
-    public EntityManagerFactory emf;
-    public EntityManager em;
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("cocoPU");
+    public EntityManager em = emf.createEntityManager();
     
     public Conference() {
     }
     
-    @PostConstruct
-    public void init() {
-        emf = Persistence.createEntityManagerFactory("cocoPU");
-        em = emf.createEntityManager();
-    }
-
     public int getId() {
         return id;
     }
