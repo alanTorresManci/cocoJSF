@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import main.datasets.assistant.Assistants;
 
 /**
  *
@@ -35,6 +36,8 @@ public class Conference implements Serializable {
     private String synopsis;
     private int cost;
     private String room;
+    
+    private Conferences current;
     
     public EntityManagerFactory emf = Persistence.createEntityManagerFactory("cocoPU");
     public EntityManager em = emf.createEntityManager();
@@ -140,7 +143,17 @@ public class Conference implements Serializable {
     public void setRoom(String room) {
         this.room = room;
     }
+
+    public Conferences getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Conferences current) {
+        this.current = current;
+    }
     
-    
+    public List<Assistants> getCurrentAssistants() {
+        return current.getAssistants(em);
+    }
     
 }

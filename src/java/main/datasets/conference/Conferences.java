@@ -29,6 +29,7 @@ import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import main.datasets.assistant.Assistants;
 import main.datasets.manager.Managers;
 
 /**
@@ -235,6 +236,11 @@ public class Conferences implements Serializable {
     public List<Conferences> getAll(EntityManager em) {
         TypedQuery<Conferences> q = em.createNamedQuery("Conferences.findAll", Conferences.class);
         return q.getResultList();
+    }
+    
+    public List<Assistants> getAssistants(EntityManager em) {
+        Assistants as = new Assistants();
+        return as.ofConference(em, this);
     }
     
 }
