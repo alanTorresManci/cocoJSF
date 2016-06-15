@@ -32,7 +32,7 @@ public class Admin implements Serializable {
     private String password;
     
     public EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("cocoJSF");
+				.createEntityManagerFactory("cocoPU");
     public EntityManager em = emf.createEntityManager();
     
     public Admin() {

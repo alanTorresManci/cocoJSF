@@ -121,6 +121,18 @@ public class Conferences implements Serializable {
         this.cost = cost;
         this.room = room;
     }
+    
+    public int store(EntityManager em , String name, String exhibitor, int capacity, String date, String synopsis, int cost, String room, String admin){
+        System.out.println(name);
+        String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `cost`, `room`, administrador) VALUES ('"+ name +"', '"
+                + exhibitor+"', "+capacity+", '"+ date +"', '"+ synopsis +"', "+ cost +", '"+ room +"', '"+ admin +"')";
+        if(!em.getTransaction().isActive())
+                em.getTransaction().begin();
+        em.createNativeQuery(query)
+            .executeUpdate();
+        em.getTransaction().commit();
+        return 0;
+    }
 
     public Integer getId() {
         return id;

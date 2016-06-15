@@ -32,7 +32,7 @@
                     <f:selectItems value="#{Admin.administradores()}" />
                 </p:selectOneMenu>
                 <f:facet name="footer">
-                    <p:commandButton value="Entrar" action="#{Conference.storeConference}"/>
+                    <p:commandButton value="Entrar" action="#{Conference.storeConference({Admin.username})}"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>
