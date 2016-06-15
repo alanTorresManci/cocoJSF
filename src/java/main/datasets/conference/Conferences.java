@@ -6,6 +6,8 @@
 package main.datasets.conference;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -193,9 +195,11 @@ public class Conferences implements Serializable {
         this.manager = manager;
     }
     
-    public void store(EntityManager em, int manager, String name, String exhibitor, int capacity, String date, String synopsis, int cost, String room) {
+    public void store(EntityManager em, int manager, String name, String exhibitor, int capacity, Date date, String synopsis, int cost, String room) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
         String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `cost`, `room`, `manager`) VALUES ('"+ name +"', '"
-                + exhibitor + "', " + capacity + ", '"+ date +"', '"+ synopsis +"', "+ cost +", '"+ room +"', "+ manager +")";
+                + exhibitor + "', " + capacity + ", '"+ df.format(date) +"', '"+ synopsis +"', "+ cost +", '"+ room +"', "+ manager +")";
         if(!em.getTransaction().isActive())
                 em.getTransaction().begin();
         em.createNativeQuery(query)

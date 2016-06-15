@@ -7,6 +7,7 @@ package main.datasets.conference;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -29,7 +30,7 @@ public class Conference implements Serializable {
     private String name;
     private String exhibitor;
     private int capacity;
-    private String date;
+    private Date date;
     private String image;
     private String synopsis;
     private int cost;
@@ -73,11 +74,11 @@ public class Conference implements Serializable {
         this.capacity = capacity;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

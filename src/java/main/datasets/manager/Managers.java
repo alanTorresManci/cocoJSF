@@ -59,7 +59,7 @@ public class Managers implements Serializable {
         this.name = name;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
