@@ -28,11 +28,11 @@
                 <h:outputText value="Lugar"/>
                 <p:inputText value="#{Conference.room}"/>
                 <p:outputLabel value="Encargado" />
-                <p:selectOneMenu value="#{Admin.username}" style="width:150px">
-                    <f:selectItems value="#{Admin.administradores()}" />
+                <p:selectOneMenu value="#{Conference.manager}" style="width:150px">
+                    <f:selectItems value="#{Manager.managerList}" />
                 </p:selectOneMenu>
                 <f:facet name="footer">
-                    <p:commandButton value="Entrar" action="#{Conference.storeConference({Admin.username})}"/>
+                    <p:commandButton value="Entrar" action="#{Conference.storeConference}"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

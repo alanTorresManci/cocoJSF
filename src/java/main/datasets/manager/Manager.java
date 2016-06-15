@@ -6,6 +6,7 @@
 package main.datasets.manager;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +22,7 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class Manager implements Serializable {
 
-    private Object[] managerList;
+    private List<Managers> managerList;
     
     public EntityManagerFactory emf;
     public EntityManager em;
@@ -36,7 +37,7 @@ public class Manager implements Serializable {
         this.managerList = m.getAll(em);
     }
 
-    public Object[] getManagerList() {
+    public List<Managers> getManagerList() {
         return managerList;
     }
     

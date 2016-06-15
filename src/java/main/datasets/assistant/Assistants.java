@@ -3,21 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.datasets.manager;
+package main.datasets.assistant;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,13 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author germanamz
  */
 @Entity
-@Table(name = "managers")
+@Table(name = "assistants")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Managers.findAll", query = "SELECT m FROM Managers m"),
-    @NamedQuery(name = "Managers.findById", query = "SELECT m FROM Managers m WHERE m.id = :id"),
-    @NamedQuery(name = "Managers.findByName", query = "SELECT m FROM Managers m WHERE m.name = :name")})
-public class Managers implements Serializable {
+    @NamedQuery(name = "Assistants.findAll", query = "SELECT a FROM Assistants a"),
+    @NamedQuery(name = "Assistants.findById", query = "SELECT a FROM Assistants a WHERE a.id = :id"),
+    @NamedQuery(name = "Assistants.findByConference", query = "SELECT a FROM Assistants a WHERE a.conference = :conference"),
+    @NamedQuery(name = "Assistants.findByName", query = "SELECT a FROM Assistants a WHERE a.name = :name")})
+public class Assistants implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,19 +41,24 @@ public class Managers implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "conference")
+    private int conference;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 128)
     @Column(name = "name")
     private String name;
 
-    public Managers() {
+    public Assistants() {
     }
 
-    public Managers(Integer id) {
+    public Assistants(Integer id) {
         this.id = id;
     }
 
-    public Managers(Integer id, String name) {
+    public Assistants(Integer id, int conference, String name) {
         this.id = id;
+        this.conference = conference;
         this.name = name;
     }
 
@@ -65,6 +68,14 @@ public class Managers implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getConference() {
+        return conference;
+    }
+
+    public void setConference(int conference) {
+        this.conference = conference;
     }
 
     public String getName() {
@@ -85,10 +96,10 @@ public class Managers implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Managers)) {
+        if (!(object instanceof Assistants)) {
             return false;
         }
-        Managers other = (Managers) object;
+        Assistants other = (Assistants) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -97,12 +108,7 @@ public class Managers implements Serializable {
 
     @Override
     public String toString() {
-        return "main.datasets.manager.Managers[ id=" + id + " ]";
-    }
-    
-    public List<Managers> getAll(EntityManager em) {
-        TypedQuery<Managers> q = em.createNamedQuery("Managers.findAll", Managers.class);
-        return q.getResultList();
+        return "main.datasets.assistant.Assistants[ id=" + id + " ]";
     }
     
 }

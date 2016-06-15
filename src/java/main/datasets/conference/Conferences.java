@@ -17,9 +17,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,7 +39,6 @@ import main.datasets.manager.Managers;
 @NamedQueries({
     @NamedQuery(name = "Conferences.findAll", query = "SELECT c FROM Conferences c"),
     @NamedQuery(name = "Conferences.findById", query = "SELECT c FROM Conferences c WHERE c.id = :id"),
-    @NamedQuery(name = "Conferences.findByManager", query = "SELECT c FROM Conferences c WHERE c.manager = :manager"),
     @NamedQuery(name = "Conferences.findByName", query = "SELECT c FROM Conferences c WHERE c.name = :name"),
     @NamedQuery(name = "Conferences.findByExhibitor", query = "SELECT c FROM Conferences c WHERE c.exhibitor = :exhibitor"),
     @NamedQuery(name = "Conferences.findByCapacity", query = "SELECT c FROM Conferences c WHERE c.capacity = :capacity"),
@@ -57,10 +56,6 @@ public class Conferences implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "manager")
-    private int manager;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 128)
     @Column(name = "name")
     private String name;
@@ -76,11 +71,9 @@ public class Conferences implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 256)
+    @Size(max = 256)
     @Column(name = "image")
     private String image;
     @Basic(optional = false)
@@ -98,9 +91,9 @@ public class Conferences implements Serializable {
     @Size(min = 1, max = 128)
     @Column(name = "room")
     private String room;
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Managers managers;
+    @JoinColumn(name = "manager", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Managers manager;
 
     public Conferences() {
     }
@@ -109,29 +102,15 @@ public class Conferences implements Serializable {
         this.id = id;
     }
 
-    public Conferences(Integer id, int manager, String name, String exhibitor, int capacity, Date date, String image, String synopsis, int cost, String room) {
+    public Conferences(Integer id, String name, String exhibitor, int capacity, Date date, String synopsis, int cost, String room) {
         this.id = id;
-        this.manager = manager;
         this.name = name;
         this.exhibitor = exhibitor;
         this.capacity = capacity;
         this.date = date;
-        this.image = image;
         this.synopsis = synopsis;
         this.cost = cost;
         this.room = room;
-    }
-    
-    public int store(EntityManager em , String name, String exhibitor, int capacity, String date, String synopsis, int cost, String room, String admin){
-        System.out.println(name);
-        String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `cost`, `room`, manager) VALUES ('"+ name +"', '"
-                + exhibitor+"', "+capacity+", '"+ date +"', '"+ synopsis +"', "+ cost +", '"+ room +"', "+ admin +")";
-        if(!em.getTransaction().isActive())
-                em.getTransaction().begin();
-        em.createNativeQuery(query)
-            .executeUpdate();
-        em.getTransaction().commit();
-        return 0;
     }
 
     public Integer getId() {
@@ -140,14 +119,6 @@ public class Conferences implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getManager() {
-        return manager;
-    }
-
-    public void setManager(int manager) {
-        this.manager = manager;
     }
 
     public String getName() {
@@ -214,12 +185,22 @@ public class Conferences implements Serializable {
         this.room = room;
     }
 
-    public Managers getManagers() {
-        return managers;
+    public Managers getManager() {
+        return manager;
     }
 
-    public void setManagers(Managers managers) {
-        this.managers = managers;
+    public void setManager(Managers manager) {
+        this.manager = manager;
+    }
+    
+    public void store(EntityManager em, int manager, String name, String exhibitor, int capacity, String date, String synopsis, int cost, String room) {
+        String query = "INSERT INTO conferences (`name`, `exhibitor`, `capacity`, `date`, `synopsis`, `cost`, `room`, `manager`) VALUES ('"+ name +"', '"
+                + exhibitor + "', " + capacity + ", '"+ date +"', '"+ synopsis +"', "+ cost +", '"+ room +"', "+ manager +")";
+        if(!em.getTransaction().isActive())
+                em.getTransaction().begin();
+        em.createNativeQuery(query)
+            .executeUpdate();
+        em.getTransaction().commit();
     }
 
     @Override
