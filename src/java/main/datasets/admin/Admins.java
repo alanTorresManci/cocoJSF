@@ -26,11 +26,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author germanamz
  */
+
 @Entity
 @Table(name = "admins")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Admins.findAll", query = "SELECT a FROM Admins a"),
+    @NamedQuery(name = "Admins.findAll", query = "SELECT a.idF ROM Admins a"),
     @NamedQuery(name = "Admins.findById", query = "SELECT a FROM Admins a WHERE a.id = :id"),
     @NamedQuery(name = "Admins.findByUsername", query = "SELECT a FROM Admins a WHERE a.username = :username"),
     @NamedQuery(name = "Admins.findByAll", query = "SELECT a FROM Admins a WHERE a.username = :username and a.password = :password"),
@@ -69,12 +70,19 @@ public class Admins implements Serializable {
         this.password = password;
     }
     
-    public Integer login(String username, String password){
+    public Integer login(String username, String password) {
         
         return 0;
     }
-    public Integer findByAll(String username, String password, EntityManager em)
-    {
+    
+    public Object[] admin(EntityManager em) {
+        TypedQuery<Admins> query =
+            em.createNamedQuery("Admins.findAll", Admins.class);
+        
+        return query.getResultList().toArray();
+    }
+    
+    public Integer findByAll(String username, String password, EntityManager em) {
         TypedQuery<Admins> query =
             em.createNamedQuery("Admins.findByAll", Admins.class);
         

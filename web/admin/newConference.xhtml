@@ -2,13 +2,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Nueva conferencia</title>
     </h:head>
     <h:body>
         <h:form>
-            
+            <p:panelGrid columns="2">
+                <f:facet name="header">
+                    Crear Conferencia
+                </f:facet>
+                <h:outputText value="Nombre"/>
+                <p:inputText value="#{Conference.name}"/>
+                <h:outputText value="Expositor"/>
+                <p:inputText value="#{Conference.exhibitor}"/>
+                <h:outputText value="Capacidad"/>
+                <p:inputText value="#{Conference.capacity}"  converterMessage="Please enter digits only."/>
+                <h:outputText value="Fecha"/>
+                <p:inputText value="#{Conference.date}"/>
+                <h:outputText value="Resumen"/>
+                <p:inputText value="#{Conference.synopsis}"/>
+                <h:outputText value="Precio"/>
+                <p:inputText value="#{Conference.cost}"  converterMessage="Please enter digits only."/>
+                <h:outputText value="Lugar"/>
+                <p:inputText value="#{Conference.room}"/>
+                <p:outputLabel value="Encargado" />
+                <p:selectOneMenu value="#{Admin.username}" style="width:150px">
+                    <f:selectItems value="#{Admin.administradores()}" />
+                </p:selectOneMenu>
+                <f:facet name="footer">
+                    <p:commandButton value="Entrar" action="#{Conference.storeConference}"/>
+                </f:facet>
+            </p:panelGrid>
         </h:form>
     </h:body>
 </html>
