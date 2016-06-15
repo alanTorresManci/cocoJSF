@@ -30,7 +30,7 @@ public class Manager implements Serializable {
     
     @PostConstruct
     public void init() {
-        emf = Persistence.createEntityManagerFactory("cocoJSF");
+        emf = Persistence.createEntityManagerFactory("cocoPU");
         em = emf.createEntityManager();
         Managers m = new Managers();
         this.managerList = m.getAll(em);
